@@ -98,16 +98,16 @@ public class Matrix {
         int oldColLength = matrix[0].length;
         double[][] newMatrix = new double[oldRowLength - 1][oldColLength - 1];
 
-        int newR = 0;
-        int newC;
+        int newRow = 0;
+        int newCol;
 
-        for (int r = 0; newR < oldRowLength - 1; r++, newR++) {
+        for (int r = 0; newRow < oldRowLength - 1; r++, newRow++) {
             if (r == row) r++;
-            newC = 0;
+            newCol = 0;
 
-            for (int c = 0; newC < oldColLength - 1; c++, newC++) {
+            for (int c = 0; newCol < oldColLength - 1; c++, newCol++) {
                 if (c == col) c++;
-                newMatrix[newR][newC] = matrix[r][c];
+                newMatrix[newRow][newCol] = matrix[r][c];
             }
         }
 
