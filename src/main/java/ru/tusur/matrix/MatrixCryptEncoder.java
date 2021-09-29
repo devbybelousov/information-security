@@ -11,7 +11,7 @@ import java.util.Arrays;
 @NoArgsConstructor
 public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEncoder {
 
-    private final String DEFAULT_KEY = "Альпинизм";
+    private final String DEFAULT_KEY = "альпинизм";
 
     private String key = DEFAULT_KEY;
     private int sizeMatrix = (int) Math.sqrt(key.length());
@@ -55,15 +55,15 @@ public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEn
     @Override
     public String encode(String var) {
         int[] arrayWord = getArrayWord(var);
-        System.out.println(Arrays.toString(arrayWord));
         String encodeWord = getCalculateWord(arrayWord, convertMatrixToDouble());
         return getWordByIndexes(encodeWord);
     }
 
     @Override
     public String decode(String var) {
-        MatrixKey matrixKey = new MatrixKey(convertMatrixToDouble(), SIZE_TABLE);
-        double[][] inverseMatrix = matrixKey.reverseKey();
+        Matrix matrix = new Matrix(convertMatrixToDouble());
+        double[][] inverseMatrix = matrix.invertMatrix(SIZE_TABLE);
+
         int[] word = getArrayWord(var);
 
         String decodeWord = getCalculateWord(word, inverseMatrix);
@@ -85,7 +85,7 @@ public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEn
         int sizeBlock = (int) Math.ceil((double) word.length / sizeMatrix);
 
         for (int i = 0; i < sizeBlock; i++) {
-            builder.append(calculateBlock(i, word, matrix));
+            builder.append(calculateBlock(i * (sizeBlock + 1), word, matrix));
         }
         return builder.toString();
     }
@@ -95,7 +95,7 @@ public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEn
         for (int i = 0; i < sizeMatrix; i++) {
             int sum = 0;
             for (int j = 0; j < sizeMatrix; j++) {
-                int indexWord = index + j * sizeMatrix;
+                int indexWord = index + j;
                 int indexLetterWord = getIndexLetterWord(indexWord, word);
                 int indexLetterKey = (int) matrix[i][j];
                 sum += indexLetterWord * indexLetterKey;
@@ -108,7 +108,7 @@ public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEn
 
     private int getIndexLetterWord(int indexWord, int[] word) {
         if (indexWord >= word.length) {
-            return 32;
+            return 66;
         } else {
             return word[indexWord];
         }

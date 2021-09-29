@@ -1,4 +1,4 @@
-package ru.tusur.lesson4.rsa;
+package ru.tusur.rsa;
 
 import org.junit.Test;
 import ru.tusur.rsa.key.PrivateKey;
