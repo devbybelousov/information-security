@@ -9,29 +9,17 @@ public class Utils {
     public static final int SIZE = 8;
     private static final char[][] table = new char[SIZE][SIZE + 1];
 
-    public static char[] createArray(int size) {
-        createTable();
-
-        int indexArray = 0;
-        char[] array = new char[size];
-
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j <= SIZE; j++) {
-                array[indexArray] = table[i][j];
-                indexArray++;
-            }
-        }
-
-        return array;
+    public static char[] createArray() {
+        return getAlphabet().toCharArray();
     }
 
     public static char[][] createTable() {
         int indexSymbol = 0;
         String alphabet = getAlphabet();
 
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j <= SIZE; j++) {
-                table[i][j] = alphabet.toCharArray()[indexSymbol];
+        for (int row = 0; row < SIZE; row++) {
+            for (int cell = 0; cell <= SIZE; cell++) {
+                table[row][cell] = alphabet.toCharArray()[indexSymbol];
                 indexSymbol++;
             }
         }

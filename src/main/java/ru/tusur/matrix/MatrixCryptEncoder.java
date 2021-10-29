@@ -6,8 +6,6 @@ import ru.tusur.model.UniversalCryptEncoder;
 import ru.tusur.service.ConsoleInput;
 import ru.tusur.utils.Utils;
 
-import java.util.Arrays;
-
 @NoArgsConstructor
 public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEncoder {
 
@@ -18,7 +16,7 @@ public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEn
     private int[][] matrix;
 
     public MatrixCryptEncoder(String key) {
-        this.table = Utils.createArray(SIZE_TABLE);
+        this.table = Utils.createArray();
         if (isRoot(key.length())) {
             this.key = key;
             this.sizeMatrix = (int) Math.sqrt(key.length());
@@ -85,7 +83,7 @@ public class MatrixCryptEncoder extends UniversalCryptEncoder implements CryptEn
         int sizeBlock = (int) Math.ceil((double) word.length / sizeMatrix);
 
         for (int i = 0; i < sizeBlock; i++) {
-            builder.append(calculateBlock(i * (sizeBlock + 1), word, matrix));
+            builder.append(calculateBlock(i * (matrix.length), word, matrix));
         }
         return builder.toString();
     }

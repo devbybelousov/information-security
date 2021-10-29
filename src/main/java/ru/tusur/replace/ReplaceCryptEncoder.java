@@ -13,7 +13,7 @@ public class ReplaceCryptEncoder extends UniversalCryptEncoder implements CryptE
 
     public ReplaceCryptEncoder(String key) {
         this.key = key;
-        table = Utils.createArray(SIZE_TABLE);
+        table = Utils.createArray();
     }
 
     @Override
